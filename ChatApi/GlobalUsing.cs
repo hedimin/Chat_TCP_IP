@@ -1,0 +1,11 @@
+﻿global using System.IO.Pipelines;
+global using System.Net;
+global using System.Net.Sockets;
+global using System.Buffers;
+global using System.Buffers.Binary;
+global using System.Diagnostics.CodeAnalysis;
+global using ChatApi.Messages;
+global using System.Threading.Channels;
+global using static ChatApi.MessageSerialization;
+global using MessagePack;
+global using System.Collections.Concurrent;

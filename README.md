@@ -1,10 +1,17 @@
 # Chat TCP/IP MAUI
 
-This is a primitive chat that uses TCP/IP sockets
+This is a primitive TCP/IP MAUI chat
 
 # Working diagram:
 
+Connection:
+
 ![Діаграма без назви drawio (3)](https://user-images.githubusercontent.com/112476754/211387853-69510c02-39e7-481c-bea2-84b712c3a3bb.png)
+
+Handling connection:
+
+![Діаграма без назви drawio (4)](https://user-images.githubusercontent.com/112476754/211396421-294f9df8-ce5b-4e71-a657-f5121f5d02f7.png)
+
 
 # Server
 The server is a conssole application. After start, it begins to listen for incoming connections:

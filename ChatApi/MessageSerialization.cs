@@ -1,7 +1,7 @@
 ﻿namespace ChatApi;
-//Every sereaized message has several bytes (depends on type of it) at the beginning
 internal static class MessageSerialization
 {
+    //Every message has several bytes (depends on type of it) at the beginning
     public const int LengthPrefixLength = sizeof(uint);
     private const int MessageTypeLength = sizeof(uint);
     private const int ShortStringLengthPrefix = sizeof(byte);

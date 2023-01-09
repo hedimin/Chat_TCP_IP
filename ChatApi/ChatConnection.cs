@@ -89,6 +89,7 @@ public sealed class ChatConnection
             Close(e);
         }
     }
+    //Making channel of messages from pipeline
 
     private async void PipeLineToChannelAsync()
     {
@@ -138,6 +139,7 @@ public sealed class ChatConnection
         }
     }
 
+    //Method for parsing messages as stream of bytes at pipeline 
     private IReadOnlyList<IMessage> ParseMessages(ReadOnlySequence<byte> buffer)
     {
         var result = new List<IMessage>();

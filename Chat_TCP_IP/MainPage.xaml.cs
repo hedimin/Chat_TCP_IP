@@ -6,7 +6,7 @@ namespace Chat_TCP_IP;
 
 public partial class MainPage : ContentPage
 {
-    private ChatConnection? _chatConnection;
+    private ChatConnection _chatConnection;
 
     public MainPage()
 	{

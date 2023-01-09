@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Chat_TCP_IP"
              x:Class="Chat_TCP_IP.MainPage">
 
     <ScrollView>
@@ -38,14 +39,33 @@
                     x:Name="NickNameBox"
                 />
             </Frame>
-            <Button 
+                <Button
                 x:Name="ChangeNickNameBtn"
                 Pressed="ChangeNickNameBtn_Pressed"
                 Grid.Column="3" 
                 Grid.Row="0"
-                Text="Change nickname"
-                />
-        </Grid>
+                Text="Change nickname">
+                    <Button.Style>
+                        <Binding Source="{x:Reference NickNameBox}" Path="Text">
+                        <Binding.Converter>
+                            <local:StringToStyleConverter>
+                                <local:StringToStyleConverter.Approved>
+                                    <Style TargetType="Button">
+                                        <Setter Property="BackgroundColor" Value="Gray" />
+                                    </Style>
+                                </local:StringToStyleConverter.Approved>
+
+                                <local:StringToStyleConverter.Denied>
+                                    <Style TargetType="Button">
+                                        <Setter Property="BackgroundColor" Value="White" />
+                                    </Style>
+                                </local:StringToStyleConverter.Denied>
+                            </local:StringToStyleConverter>
+                        </Binding.Converter>
+                    </Binding>
+                    </Button.Style>
+                </Button>
+            </Grid>
 
 
             <Grid RowSpacing="20">
@@ -67,12 +87,31 @@
                         />
                 </Frame>
                 <Button
-                    Grid.Row="1"
-                    Grid.Column="0"
+                   Grid.Row="1"
+                   Grid.Column="0"
                    x:Name="SendMessageBtn"
                    Pressed="SendMessageBtn_Pressed"
-                   Text="Send message"
-                />
+                   Text="Send message">
+                    <Button.Style>
+                        <Binding Source="{x:Reference EnterMessageField}" Path="Text">
+                            <Binding.Converter>
+                                <local:StringToStyleConverter>
+                                    <local:StringToStyleConverter.Approved>
+                                        <Style TargetType="Button">
+                                            <Setter Property="BackgroundColor" Value="Gray" />
+                                        </Style>
+                                    </local:StringToStyleConverter.Approved>
+
+                                    <local:StringToStyleConverter.Denied>
+                                        <Style TargetType="Button">
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                        </Style>
+                                    </local:StringToStyleConverter.Denied>
+                                </local:StringToStyleConverter>
+                            </Binding.Converter>
+                        </Binding>
+                    </Button.Style>
+                </Button>
 
             </Grid>
 

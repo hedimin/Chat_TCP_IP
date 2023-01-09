@@ -1,10 +1,5 @@
-﻿using ChatApi.Messages;
-using System;
-using System.Buffers.Binary;
-using System.Buffers;
-using System.Collections.Generic;
-namespace ChatApi;
-
+﻿namespace ChatApi;
+//Every sereaized message has several bytes (depends on type of it) at the beginning
 internal static class MessageSerialization
 {
     public const int LengthPrefixLength = sizeof(uint);
@@ -44,10 +39,13 @@ internal static class MessageSerialization
         {
             throw new InvalidOperationException("Unknown message type.");
         }
-        int ShortStringFieldLength(string value) => ShortStringLengthPrefix + MessagePackSerializer.Serialize(value).Length;
-        int LongStringFieldLength(string value) => LongStringLengthPrefix + MessagePackSerializer.Serialize(value).Length;
+        int ShortStringFieldLength(string value) => ShortStringLengthPrefix + 
+            MessagePackSerializer.Serialize(value).Length;
+        int LongStringFieldLength(string value) => LongStringLengthPrefix + 
+            MessagePackSerializer.Serialize(value).Length;
     }
-    public static bool TryReadLongString(ref this SequenceReader<byte> sequenceReader, [NotNullWhen(true)] out string? value)
+    public static bool TryReadLongString(ref this SequenceReader<byte> sequenceReader, 
+        [NotNullWhen(true)] out string? value)
     {
         value = null;
         if (!sequenceReader.TryReadBigEndian(out short signedLength))
@@ -59,7 +57,8 @@ internal static class MessageSerialization
         return true;
     }
 
-    private static bool TryReadShortString(ref this SequenceReader<byte> sequenceReader, [NotNullWhen(true)] out string? value)
+    private static bool TryReadShortString(ref this SequenceReader<byte> sequenceReader,
+        [NotNullWhen(true)] out string? value)
     {
         value = null;
         if (!sequenceReader.TryRead(out var length))
@@ -92,7 +91,8 @@ internal static class MessageSerialization
         return true;
     }
 
-    public static bool TryReadMessage(ref this SequenceReader<byte> sequenceReader, uint maxMessageSize, out IMessage? message)
+    public static bool TryReadMessage(ref this SequenceReader<byte> sequenceReader, 
+        uint maxMessageSize, out IMessage? message)
     {
         message = null;
         if (!sequenceReader.TryReadLengthPrefix(out var lengthPrefix))
@@ -158,10 +158,8 @@ internal static class MessageSerialization
         }
         else
         {
-            //Ignoring unknown message types
             sequenceReader.Advance(lengthPrefix - MessageTypeLength);
             return true;
-
         }
     }
 

@@ -1,12 +1,14 @@
 ﻿Console.WriteLine("Starting server...");
-
 var connections = new ConnectionCollection();
 
+//Listening 33333 port
 var listeningSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 listeningSocket.Bind(new IPEndPoint(IPAddress.Any, 33333));
 
 Console.WriteLine("Listening...");
 listeningSocket.Listen();
+
+//Accepting connections
 while (true)
 {
     var connectedSocket = await listeningSocket.AcceptAsync();
@@ -15,6 +17,7 @@ while (true)
     ProcessSocketAsync(connectedSocket);
 }
 
+//Handling data
 async void ProcessSocketAsync(Socket socket)
 {
     var chatConnection = new ChatConnection(new PipeLineSocket(socket));
@@ -58,10 +61,10 @@ async void ProcessSocketAsync(Socket socket)
                         "NickName is already taken\n"));
                 }
             }
+            //Error handling
             else
                 Console.WriteLine($"Got unknown message from {chatConnection.RemoteEndPoint}\n");
         }
-
         Console.WriteLine($"Connection at {chatConnection.RemoteEndPoint} was disconnected\n");
     }
     catch (Exception e)

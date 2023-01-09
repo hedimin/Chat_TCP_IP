@@ -1,5 +1,5 @@
 ﻿namespace ChatApi;
-
+//Main logic to handling connection and "convert" pipeline to chanel
 public sealed class ChatConnection
 {
     private readonly PipeLineSocket _pipeLineSocket;

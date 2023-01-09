@@ -1,5 +1,5 @@
 ﻿namespace ChatApi;
-
+//To make stream of messages, not of bytes, app uses pipelines
 public sealed class PipeLineSocket
 {
     private readonly Pipe _outputPipe;
